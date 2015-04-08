@@ -36,9 +36,9 @@
 
 %token <token> TCOMMA TCOLON TLPAR TRPAR 
 %token <token> TDOLLAR THASH
-%token <token> TREGX TREGY
+%token <token> TREGA TREGX TREGY
     
-%token <token> TADC TAND
+%token <token> TADC TAND TASL
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -79,6 +79,13 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       } 
                       | TAND indirect_x_operand { EMIT(0x21, $2); }
                       | TAND indirect_y_operand { EMIT(0x31, $2); }
+                      | TASL TREGA { EMIT(0x0A); }
+                      | TASL zero_page_operand { EMIT(0x06, $2); }
+                      | TASL zero_page_operand TCOMMA TREGX { EMIT(0x16, $2); }
+                      | TASL absolute_operand { EMIT(0x0E, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TASL absolute_operand TCOMMA TREGX { 
+                            EMIT(0x1E, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
                       ;
                 
                     

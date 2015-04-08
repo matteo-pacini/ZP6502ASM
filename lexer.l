@@ -4,7 +4,6 @@
     ////////////
 
     #define TOKEN(t) (yylval.token = t)
-    #define SAVE_MNEMONIC() yylval.mnemonic = strdup(yytext)
     
     ///////////
     // BISON //
@@ -41,7 +40,9 @@
 
 "ADC"                                   return TOKEN(TADC);
 "AND"                                   return TOKEN(TAND);
+"ASL"                                   return TOKEN(TASL);
 
+"A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);
 "Y"                                     return TOKEN(TREGY);
 

@@ -22,3 +22,11 @@ AND $4400,Y
 AND ($44,X)
 AND ($44),Y
 
+;ASL (Arithmetic Shift Left)
+
+ASL A
+ASL $44
+ASL $44,X
+ASL $4400
+ASL $4400,X
+
