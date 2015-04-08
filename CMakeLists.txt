@@ -14,6 +14,6 @@ add_flex_bison_dependency(SCANNER PARSER)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(zp6502asm 
-  	${BISON_PARSER_OUTPUTS}
-	${FLEX_SCANNER_OUTPUTS}
+    ${BISON_PARSER_OUTPUTS}
+    ${FLEX_SCANNER_OUTPUTS}
 )
