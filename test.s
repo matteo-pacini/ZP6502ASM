@@ -61,3 +61,10 @@ CPX $4400
 CPY #$44
 CPY $44
 CPY $4400
+
+;DEC (DECrement memory)
+
+DEC $44
+DEC $44,X
+DEC $4400
+DEC $4400,X

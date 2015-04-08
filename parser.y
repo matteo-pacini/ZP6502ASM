@@ -39,6 +39,7 @@
 %token <token> TREGA TREGX TREGY
     
 %token <token> TADC TAND TASL TBIT TBRK TCMP TCPX TCPY
+%token <token> TDEC
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -104,6 +105,12 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TCPY immediate_operand { EMIT(0xC0, $2); }
                       | TCPY zero_page_operand { EMIT(0xC4, $2); }
                       | TCPY absolute_operand { EMIT(0xCC, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TDEC zero_page_operand { EMIT(0xC6, $2); }
+                      | TDEC zero_page_operand TCOMMA TREGX { EMIT(0xD6, $2); } 
+                      | TDEC absolute_operand { EMIT(0xCE, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TDEC absolute_operand TCOMMA TREGX { 
+                            EMIT(0xDE, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
                       ;
                 
                     

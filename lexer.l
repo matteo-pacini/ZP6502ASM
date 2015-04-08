@@ -46,6 +46,7 @@
 "CMP"                                   return TOKEN(TCMP);
 "CPX"                                   return TOKEN(TCPX);
 "CPY"                                   return TOKEN(TCPY);
+"DEC"                                   return TOKEN(TDEC);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);
