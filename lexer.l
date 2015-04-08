@@ -44,6 +44,8 @@
 "BIT"                                   return TOKEN(TBIT);
 "BRK"                                   return TOKEN(TBRK);
 "CMP"                                   return TOKEN(TCMP);
+"CPX"                                   return TOKEN(TCPX);
+"CPY"                                   return TOKEN(TCPY);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

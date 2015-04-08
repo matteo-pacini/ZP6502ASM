@@ -38,7 +38,7 @@
 %token <token> TDOLLAR THASH
 %token <token> TREGA TREGX TREGY
     
-%token <token> TADC TAND TASL TBIT TBRK TCMP
+%token <token> TADC TAND TASL TBIT TBRK TCMP TCPX TCPY
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -98,6 +98,12 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       } 
                       | TCMP indirect_x_operand { EMIT(0xC1, $2); }
                       | TCMP indirect_y_operand { EMIT(0xD1, $2); }
+                      | TCPX immediate_operand { EMIT(0xE0, $2); }
+                      | TCPX zero_page_operand { EMIT(0xE4, $2); }
+                      | TCPX absolute_operand { EMIT(0xEC, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TCPY immediate_operand { EMIT(0xC0, $2); }
+                      | TCPY zero_page_operand { EMIT(0xC4, $2); }
+                      | TCPY absolute_operand { EMIT(0xCC, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
                       ;
                 
                     

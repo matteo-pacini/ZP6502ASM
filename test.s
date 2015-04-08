@@ -50,3 +50,14 @@ CMP $4400,Y
 CMP ($44,X)
 CMP ($44),Y
 
+;CPX (ComPare X register)
+
+CPX #$44
+CPX $44
+CPX $4400
+
+;CPY (ComPare Y register)
+
+CPY #$44
+CPY $44
+CPY $4400
