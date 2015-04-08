@@ -30,3 +30,23 @@ ASL $44,X
 ASL $4400
 ASL $4400,X
 
+;BIT (test BITs)
+
+BIT $44 
+BIT $4400
+
+;BREAK
+
+BRK
+
+;CMP (CoMPare accumulator)
+
+CMP #$44
+CMP $44
+CMP $44,X
+CMP $4400
+CMP $4400,X
+CMP $4400,Y
+CMP ($44,X)
+CMP ($44),Y
+

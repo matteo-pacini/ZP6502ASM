@@ -38,7 +38,7 @@
 %token <token> TDOLLAR THASH
 %token <token> TREGA TREGX TREGY
     
-%token <token> TADC TAND TASL
+%token <token> TADC TAND TASL TBIT TBRK TCMP
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -86,6 +86,18 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TASL absolute_operand TCOMMA TREGX { 
                             EMIT(0x1E, (uint8_t)($2), (uint8_t)($2 >> 8));
                       } 
+                      | TBIT zero_page_operand { EMIT(0x24, $2); }
+                      | TBIT absolute_operand { EMIT(0x2C, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TBRK { EMIT(0x00); }
+                      | TCMP immediate_operand { EMIT(0xC9, $2); }
+                      | TCMP zero_page_operand { EMIT(0xC5, $2); }
+                      | TCMP zero_page_operand TCOMMA TREGX { EMIT(0xD5, $2); } 
+                      | TCMP absolute_operand { EMIT(0xCD, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TCMP absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0xDD:0xD9, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TCMP indirect_x_operand { EMIT(0xC1, $2); }
+                      | TCMP indirect_y_operand { EMIT(0xD1, $2); }
                       ;
                 
                     

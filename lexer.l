@@ -41,6 +41,9 @@
 "ADC"                                   return TOKEN(TADC);
 "AND"                                   return TOKEN(TAND);
 "ASL"                                   return TOKEN(TASL);
+"BIT"                                   return TOKEN(TBIT);
+"BRK"                                   return TOKEN(TBRK);
+"CMP"                                   return TOKEN(TCMP);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);
