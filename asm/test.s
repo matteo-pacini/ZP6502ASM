@@ -213,3 +213,15 @@ PHA
 PLA
 PHP
 PLP
+
+;STX (STore X register)
+
+STX $44 
+STX $44,Y
+STX $4400
+ 
+;STY (STore Y register)
+
+STY $44
+STY $44,X
+STY $4400

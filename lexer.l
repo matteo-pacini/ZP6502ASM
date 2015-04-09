@@ -110,6 +110,8 @@
 "PLA"                                   return TOKEN(TPLA);
 "PHP"                                   return TOKEN(TPHP);
 "PLP"                                   return TOKEN(TPLP);
+"STX"                                   return TOKEN(TSTX);
+"STY"                                   return TOKEN(TSTY);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

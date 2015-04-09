@@ -69,7 +69,7 @@
 %token <token> TINC TJMP TJSR TLDA TLDX TLDY TLSR TNOP TORA
 %token <token> TTAX TTXA TDEX TINX TTAY TTYA TDEY TINY
 %token <token> TROL TROR TRTI TRTS TSBC TSTA TTXS TTSX TPHA
-%token <token> TPLA TPHP TPLP
+%token <token> TPLA TPHP TPLP TSTX TSTY
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -253,6 +253,12 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TPLA { EMIT(0x68); }
                       | TPHP { EMIT(0x08); }
                       | TPLP { EMIT(0x28); }
+                      | TSTX zero_page_operand { EMIT(0x86, $2); }
+                      | TSTX zero_page_operand TCOMMA TREGY { EMIT(0x96, $2); }
+                      | TSTX absolute_operand { EMIT(0x8E, (uint8_t)($2), (uint8_t)($2 >> 8)); }
+                      | TSTY zero_page_operand { EMIT(0x84, $2); }
+                      | TSTY zero_page_operand TCOMMA TREGX { EMIT(0x94, $2); }
+                      | TSTY absolute_operand { EMIT(0x8C, (uint8_t)($2), (uint8_t)($2 >> 8)); }
                       ;
                 
                     
