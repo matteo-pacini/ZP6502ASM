@@ -82,6 +82,11 @@
 "CLD"                                   return TOKEN(TCLD);
 "SED"                                   return TOKEN(TSED);
 "INC"                                   return TOKEN(TINC);
+"JMP"                                   return TOKEN(TJMP);
+"JSR"                                   return TOKEN(TJSR);
+"LDA"                                   return TOKEN(TLDA);
+"LDX"                                   return TOKEN(TLDX);
+"LDY"                                   return TOKEN(TLDY);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

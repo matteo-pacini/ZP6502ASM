@@ -97,3 +97,38 @@ INC $44,X
 INC $4400
 INC $4400,X
 
+;JMP (JuMP)
+
+JMP $5597
+JMP ($5597)
+
+;JSR (Jump to SubRoutine)
+
+JSR $5597
+
+;LDA (LoaD Accumulator)
+
+LDA #$44
+LDA $44
+LDA $44,X
+LDA $4400
+LDA $4400,X
+LDA $4400,Y
+LDA ($44,X)
+LDA ($44),Y
+
+;LDX (LoaD X register)
+
+LDX #$44
+LDX $44
+LDX $44,Y
+LDX $4400
+LDX $4400,Y
+
+;LDY (LoaD Y register)
+
+LDY #$44
+LDY $44
+LDY $44,X
+LDY $4400
+LDY $4400,X

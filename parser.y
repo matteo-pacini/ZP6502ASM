@@ -66,14 +66,14 @@
     
 %token <token> TADC TAND TASL TBIT TBRK TCMP TCPX TCPY
 %token <token> TDEC TEOR TCLC TSEC TCLI TSEI TCLV TCLD TSED
-%token <token> TINC
+%token <token> TINC TJMP TJSR TLDA TLDX TLDY
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
     
 %type <token> register_operand
 %type <uint8> immediate_operand zero_page_operand indirect_x_operand indirect_y_operand
-%type <uint16> absolute_operand
+%type <uint16> absolute_operand indirect_operand
         
 %start source
 
@@ -160,6 +160,32 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TINC absolute_operand TCOMMA TREGX { 
                             EMIT(0xFE, (uint8_t)($2), (uint8_t)($2 >> 8));
                       }
+                      | TJMP absolute_operand { EMIT(0x4C, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TJMP indirect_operand { EMIT(0x6C, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TJSR absolute_operand { EMIT(0x20, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TLDA immediate_operand { EMIT(0xA9, $2); }
+                      | TLDA zero_page_operand { EMIT(0xA5, $2); }
+                      | TLDA zero_page_operand TCOMMA TREGX { EMIT(0xB5, $2); } 
+                      | TLDA absolute_operand { EMIT(0xAD, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TLDA absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0xBD:0xB9, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TLDA indirect_x_operand { EMIT(0xA1, $2); }
+                      | TLDA indirect_y_operand { EMIT(0xB1, $2); }
+                      | TLDX immediate_operand { EMIT(0xA2, $2); }
+                      | TLDX zero_page_operand { EMIT(0xA6, $2); }
+                      | TLDX zero_page_operand TCOMMA TREGY { EMIT(0xB6, $2); } 
+                      | TLDX absolute_operand { EMIT(0xAE, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TLDX absolute_operand TCOMMA TREGY { 
+                            EMIT(0xBE, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
+                      | TLDY immediate_operand { EMIT(0xA0, $2); }
+                      | TLDY zero_page_operand { EMIT(0xA4, $2); }
+                      | TLDY zero_page_operand TCOMMA TREGX { EMIT(0xB4, $2); } 
+                      | TLDY absolute_operand { EMIT(0xAC, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TLDY absolute_operand TCOMMA TREGX { 
+                            EMIT(0xBC, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
                       ;
                 
                     
@@ -180,6 +206,12 @@ absolute_operand : TDOLLAR TUINT16 {
     $$ = $2;
 
 };
+
+indirect_operand : TLPAR TDOLLAR TUINT16 TRPAR {
+
+    $$ = $3;
+
+}
 
 indirect_x_operand : TLPAR TDOLLAR TUINT8 TCOMMA TREGX TRPAR {
 
