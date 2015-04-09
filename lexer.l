@@ -100,6 +100,16 @@
 "INY"                                   return TOKEN(TINY);
 "ROL"                                   return TOKEN(TROL);
 "ROR"                                   return TOKEN(TROR);
+"RTI"                                   return TOKEN(TRTI);
+"RTS"                                   return TOKEN(TRTS);
+"SBC"                                   return TOKEN(TSBC);
+"STA"                                   return TOKEN(TSTA);
+"TXS"                                   return TOKEN(TTXS);
+"TSX"                                   return TOKEN(TTSX);
+"PHA"                                   return TOKEN(TPHA);
+"PLA"                                   return TOKEN(TPLA);
+"PHP"                                   return TOKEN(TPHP);
+"PLP"                                   return TOKEN(TPLP);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

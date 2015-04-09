@@ -180,3 +180,36 @@ ROR $44
 ROR $44,X
 ROR $4400
 ROR $4400,X
+
+RTI
+RTS
+
+;SBC (SuBtract with Carry)
+
+SBC #$44
+SBC $44
+SBC $44,X
+SBC $4400
+SBC $4400,X
+SBC $4400,Y
+SBC ($44,X)
+SBC ($44),Y
+
+;STA (STore Accumulator)
+
+STA $44
+STA $44,X
+STA $4400
+STA $4400,X
+STA $4400,Y
+STA ($44,X)
+STA ($44),Y
+
+;Stack Instructions
+
+TXS
+TSX
+PHA
+PLA
+PHP
+PLP

@@ -68,7 +68,8 @@
 %token <token> TDEC TEOR TCLC TSEC TCLI TSEI TCLV TCLD TSED
 %token <token> TINC TJMP TJSR TLDA TLDX TLDY TLSR TNOP TORA
 %token <token> TTAX TTXA TDEX TINX TTAY TTYA TDEY TINY
-%token <token> TROL TROR
+%token <token> TROL TROR TRTI TRTS TSBC TSTA TTXS TTSX TPHA
+%token <token> TPLA TPHP TPLP
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -227,6 +228,31 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TROR absolute_operand TCOMMA TREGX { 
                             EMIT(0x7E, (uint8_t)($2), (uint8_t)($2 >> 8));
                       }
+                      | TRTI { EMIT(0x40); }
+                      | TRTS { EMIT(0x60); }
+                      | TSBC immediate_operand { EMIT(0xE9, $2); }
+                      | TSBC zero_page_operand { EMIT(0xE5, $2); }
+                      | TSBC zero_page_operand TCOMMA TREGX { EMIT(0xF5, $2); } 
+                      | TSBC absolute_operand { EMIT(0xED, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TSBC absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0xFD:0xF9, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TSBC indirect_x_operand { EMIT(0xE1, $2); }
+                      | TSBC indirect_y_operand { EMIT(0xF1, $2); }
+                      | TSTA zero_page_operand { EMIT(0x85, $2); }
+                      | TSTA zero_page_operand TCOMMA TREGX { EMIT(0x95, $2); } 
+                      | TSTA absolute_operand { EMIT(0x8D, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TSTA absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0x9D:0x99, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TSTA indirect_x_operand { EMIT(0x81, $2); }
+                      | TSTA indirect_y_operand { EMIT(0x91, $2); }
+                      | TTXS { EMIT(0x9A); }
+                      | TTSX { EMIT(0xBA); }
+                      | TPHA { EMIT(0x48); }
+                      | TPLA { EMIT(0x68); }
+                      | TPHP { EMIT(0x08); }
+                      | TPLP { EMIT(0x28); }
                       ;
                 
                     
