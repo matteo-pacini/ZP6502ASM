@@ -65,7 +65,8 @@
 %token <token> TREGA TREGX TREGY
     
 %token <token> TADC TAND TASL TBIT TBRK TCMP TCPX TCPY
-%token <token> TDEC
+%token <token> TDEC TEOR TCLC TSEC TCLI TSEI TCLV TCLD TSED
+%token <token> TINC
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -136,6 +137,28 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TDEC absolute_operand { EMIT(0xCE, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
                       | TDEC absolute_operand TCOMMA TREGX { 
                             EMIT(0xDE, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
+                      | TEOR immediate_operand { EMIT(0x49, $2); }
+                      | TEOR zero_page_operand { EMIT(0x45, $2); }
+                      | TEOR zero_page_operand TCOMMA TREGX { EMIT(0x55, $2); } 
+                      | TEOR absolute_operand { EMIT(0x4D, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TEOR absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0x5D:0x59, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TEOR indirect_x_operand { EMIT(0x41, $2); }
+                      | TEOR indirect_y_operand { EMIT(0x51, $2); }
+                      | TCLC { EMIT(0x18); }
+                      | TSEC { EMIT(0x38); }
+                      | TCLI { EMIT(0x58); }
+                      | TSEI { EMIT(0x78); }
+                      | TCLV { EMIT(0xB8); }
+                      | TCLD { EMIT(0xD8); }
+                      | TSED { EMIT(0xF8); }
+                      | TINC zero_page_operand { EMIT(0xE6, $2); }
+                      | TINC zero_page_operand TCOMMA TREGX { EMIT(0xF6, $2); } 
+                      | TINC absolute_operand { EMIT(0xEE, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TINC absolute_operand TCOMMA TREGX { 
+                            EMIT(0xFE, (uint8_t)($2), (uint8_t)($2 >> 8));
                       }
                       ;
                 

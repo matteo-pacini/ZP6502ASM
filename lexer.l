@@ -73,6 +73,15 @@
 "CPX"                                   return TOKEN(TCPX);
 "CPY"                                   return TOKEN(TCPY);
 "DEC"                                   return TOKEN(TDEC);
+"EOR"                                   return TOKEN(TEOR);
+"CLC"                                   return TOKEN(TCLC);
+"SEC"                                   return TOKEN(TSEC);
+"CLI"                                   return TOKEN(TCLI);
+"SEI"                                   return TOKEN(TSEI);
+"CLV"                                   return TOKEN(TCLV);
+"CLD"                                   return TOKEN(TCLD);
+"SED"                                   return TOKEN(TSED);
+"INC"                                   return TOKEN(TINC);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

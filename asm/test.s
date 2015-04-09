@@ -68,3 +68,32 @@ DEC $44
 DEC $44,X
 DEC $4400
 DEC $4400,X
+
+;EOR (bitwise Exclusive OR)
+
+EOR #$44
+EOR $44
+EOR $44,X
+EOR $4400
+EOR $4400,X
+EOR $4400,Y
+EOR ($44,X)
+EOR ($44),Y
+
+;Flag (Processor Status) Instructions
+
+CLC
+SEC
+CLI
+SEI
+CLV
+CLD
+SED
+
+;INC (INCrement memory)
+
+INC $44
+INC $44,X
+INC $4400
+INC $4400,X
+
