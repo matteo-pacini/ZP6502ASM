@@ -132,3 +132,35 @@ LDY $44
 LDY $44,X
 LDY $4400
 LDY $4400,X
+
+;LSR (Logical Shift Right)
+
+LSR A
+LSR $44
+LSR $44,X
+LSR $4400
+LSR $4400,X
+
+NOP
+
+;ORA (bitwise OR with Accumulator)
+
+ORA #$44
+ORA $44
+ORA $44,X
+ORA $4400
+ORA $4400,X
+ORA $4400,Y
+ORA ($44,X)
+ORA ($44),Y
+
+;Register Instructions
+
+TAX
+TXA
+DEX
+INX
+TAY
+TYA
+DEY
+INY

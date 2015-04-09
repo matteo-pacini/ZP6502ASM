@@ -87,6 +87,17 @@
 "LDA"                                   return TOKEN(TLDA);
 "LDX"                                   return TOKEN(TLDX);
 "LDY"                                   return TOKEN(TLDY);
+"LSR"                                   return TOKEN(TLSR);
+"NOP"                                   return TOKEN(TNOP);
+"ORA"                                   return TOKEN(TORA);
+"TAX"                                   return TOKEN(TTAX);
+"TXA"                                   return TOKEN(TTXA);
+"DEX"                                   return TOKEN(TDEX);
+"INX"                                   return TOKEN(TINX);
+"TAY"                                   return TOKEN(TTAY);
+"TYA"                                   return TOKEN(TTYA);
+"DEY"                                   return TOKEN(TDEY);
+"INY"                                   return TOKEN(TINY);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);

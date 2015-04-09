@@ -66,7 +66,8 @@
     
 %token <token> TADC TAND TASL TBIT TBRK TCMP TCPX TCPY
 %token <token> TDEC TEOR TCLC TSEC TCLI TSEI TCLV TCLD TSED
-%token <token> TINC TJMP TJSR TLDA TLDX TLDY
+%token <token> TINC TJMP TJSR TLDA TLDX TLDY TLSR TNOP TORA
+%token <token> TTAX TTXA TDEX TINX TTAY TTYA TDEY TINY
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -186,6 +187,31 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TLDY absolute_operand TCOMMA TREGX { 
                             EMIT(0xBC, (uint8_t)($2), (uint8_t)($2 >> 8));
                       }
+                      | TLSR TREGA { EMIT(0x4A); }
+                      | TLSR zero_page_operand { EMIT(0x46, $2); }
+                      | TLSR zero_page_operand TCOMMA TREGX { EMIT(0x56, $2); } 
+                      | TLSR absolute_operand { EMIT(0x4E, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TLSR absolute_operand TCOMMA TREGX { 
+                            EMIT(0x5E, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
+                      | TNOP { EMIT(0xEA); }
+                      | TORA immediate_operand { EMIT(0x09, $2); }
+                      | TORA zero_page_operand { EMIT(0x05, $2); }
+                      | TORA zero_page_operand TCOMMA TREGX { EMIT(0x15, $2); } 
+                      | TORA absolute_operand { EMIT(0x0D, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TORA absolute_operand TCOMMA register_operand { 
+                            EMIT($4==TREGX?0x1D:0x19, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      } 
+                      | TORA indirect_x_operand { EMIT(0x01, $2); }
+                      | TORA indirect_y_operand { EMIT(0x11, $2); }
+                      | TTAX { EMIT(0xAA); }
+                      | TTXA { EMIT(0x8A); }
+                      | TDEX { EMIT(0xCA); }
+                      | TINX { EMIT(0xE8); }
+                      | TTAY { EMIT(0xA8); }
+                      | TTYA { EMIT(0x98); }
+                      | TDEY { EMIT(0x88); }
+                      | TINY { EMIT(0xC8); }
                       ;
                 
                     
