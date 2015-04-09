@@ -164,3 +164,19 @@ TAY
 TYA
 DEY
 INY
+
+;ROL (ROtate Left)
+
+ROL A
+ROL $44
+ROL $44,X
+ROL $4400
+ROL $4400,X
+
+;ROR (ROtate Right)
+
+ROR A
+ROR $44
+ROR $44,X
+ROR $4400
+ROR $4400,X

@@ -98,6 +98,8 @@
 "TYA"                                   return TOKEN(TTYA);
 "DEY"                                   return TOKEN(TDEY);
 "INY"                                   return TOKEN(TINY);
+"ROL"                                   return TOKEN(TROL);
+"ROR"                                   return TOKEN(TROR);
 
 "A"                                     return TOKEN(TREGA);
 "X"                                     return TOKEN(TREGX);
@@ -118,7 +120,18 @@ int main(int argc, char *argv[]) {
     }
     
     FILE *input = fopen(argv[1], "r");
+	
+	if (!input) {
+		fprintf(stderr, "Could not open input file: \"%s\"!", argv[1]);
+		return 1;
+	}
+	
     FILE *output = fopen(argv[2], "wb");
+	
+	if (!output) {
+		fprintf(stderr, "Could not write to output file: \"%s\"!", argv[1]);
+		return 1;
+	}
     
     yyin = input;
     

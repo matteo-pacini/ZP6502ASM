@@ -68,6 +68,7 @@
 %token <token> TDEC TEOR TCLC TSEC TCLI TSEI TCLV TCLD TSED
 %token <token> TINC TJMP TJSR TLDA TLDX TLDY TLSR TNOP TORA
 %token <token> TTAX TTXA TDEX TINX TTAY TTYA TDEY TINY
+%token <token> TROL TROR
     
 %token <uint8> TUINT8
 %token <uint16> TUINT16
@@ -212,6 +213,20 @@ instruction_statement : TADC immediate_operand { EMIT(0x69, $2); }
                       | TTYA { EMIT(0x98); }
                       | TDEY { EMIT(0x88); }
                       | TINY { EMIT(0xC8); }
+                      | TROL TREGA { EMIT(0x2A); }
+                      | TROL zero_page_operand { EMIT(0x26, $2); }
+                      | TROL zero_page_operand TCOMMA TREGX { EMIT(0x36, $2); } 
+                      | TROL absolute_operand { EMIT(0x2E, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TROL absolute_operand TCOMMA TREGX { 
+                            EMIT(0x3E, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
+                      | TROR TREGA { EMIT(0x6A); }
+                      | TROR zero_page_operand { EMIT(0x66, $2); }
+                      | TROR zero_page_operand TCOMMA TREGX { EMIT(0x76, $2); } 
+                      | TROR absolute_operand { EMIT(0x6E, (uint8_t)($2), (uint8_t)($2 >> 8)); } 
+                      | TROR absolute_operand TCOMMA TREGX { 
+                            EMIT(0x7E, (uint8_t)($2), (uint8_t)($2 >> 8));
+                      }
                       ;
                 
                     
